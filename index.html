@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            width: 713px;
+            margin: 100px auto;
+        }
+
+        li{
+            float: left;
+            width: 88px;
+            height: 40px;
+            border: 1px solid #666666;
+            margin-left: -1px;
+            position: relative;
+            overflow: hidden;
+        }
+        span{
+            position: absolute;
+            top: 0;
+            left: 45%;
+            text-align: center;
+            line-height: 40px;
+            z-index: 99;
+        }
+        i{
+            position: absolute;
+            left: 0;
+            bottom: -40px;
+            width: 88px;
+            height: 40px;
+        }
+        .qingc{
+            clear: both;
+        }
+        p{
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+  <ul>
+      <li><span>1</span><i></i></li>
+      <li><span>2</span><i></i></li>
+      <li><span>3</span><i></i></li>
+      <li><span>4</span><i></i></li>
+      <li><span>5</span><i></i></li>
+      <li><span>6</span><i></i></li>
+      <li><span>7</span><i></i></li>
+      <li><span>8</span><i></i></li>
+  </ul>
+
+<audio src="1.mp3"></audio>
+<audio src="2.mp3"></audio>
+<audio src="3.mp3"></audio>
+<audio src="4.mp3"></audio>
+<audio src="5.mp3"></audio>
+<audio src="6.mp3"></audio>
+<audio src="7.mp3"></audio>
+<audio src="8.mp3"></audio>
+
+<div class="qingc"></div>
+<p>我是一个粉刷匠 5353531 24325 5353531 24321 2244315 24325 5353531 24321</p>
+<p>生日快乐 55 65 87- 55 65 21- 55 53 176- 44 31 21-</p>
+<p>小星星 1 1 5 5 6 6 5－ 4 4 3 3 2 2 1－ 5 5 4 4 3 3 2－ 5 5 4 4 3 3 2－ 1 1 5 5 6 6 5－ 4 4 3 3 2 2 1－</p>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+
+    //给音乐绑定属性
+    var audio = document.querySelectorAll('audio');
+    //给需要的颜色放在函数里面
+    var arr = ['red','yellow','blue','coral','hotpink','skyblue','gold','salmon'];
+
+    //设置需要出来的颜色
+    $('i').each(function (i,e) {
+        $(e).css('background',arr[i])
+    })
+    // 鼠标移动身上事件
+    $('li').hover(function () {
+        // 给音乐设置对应位置播放
+        var index = $(this).index();
+        // 设置随时播放
+        audio[index].load();
+        audio[index].play();
+        //当鼠标放入，背景颜色出现
+        $('li').eq(index).children('i').stop().animate({bottom:0},300);
+    },function () {
+        var index = $(this).index();
+        // 鼠标移出隐藏
+        $('li').eq(index).children('i').stop().animate({bottom:-40},300);
+    });
+
+    // 给音乐设置点击键盘事件
+    $(window).keyup(function (e) {
+        // 给键盘 设置范围
+        if (e.keyCode >= 97 && e.keyCode <= 104 ){
+            // 1-8键盘，代表97-104
+            var index = e.keyCode - 97;
+            $('li').eq(index).trigger('mouseenter');
+            setTimeout(function () {
+                $('li').eq(index).trigger('mouseleave');
+            },300)
+            // audio[index].load();
+            // audio[index].play();
+            // $('li').eq(index).stop().animate({bottom:0},300);
+        }
+    })
+</script>
